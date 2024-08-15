@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/models/note_database.dart';
+import 'package:provider/provider.dart';
 
 class NotesPage extends StatefulWidget {
   const NotesPage({super.key});
@@ -20,8 +22,17 @@ class _NotesPageState extends State<NotesPage> {
           controller: textController,
         ),
         actions: [
-           // create a button 
-           
+          // create a button
+          MaterialButton(
+            onPressed: () {
+              // call the addNote method from the provider
+              // to save the note to the database
+              context.read<NoteDataBase>().addNote(textController.text);
+              // and then close the dialog
+              Navigator.of(context).pop();
+            },
+            child: const Text("Create"),
+          ),
         ],
       ),
     );
