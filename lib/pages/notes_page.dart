@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:note_app/models/note_database.dart';
 import 'package:provider/provider.dart';
 
+import '../models/note.dart';
+
 class NotesPage extends StatefulWidget {
   const NotesPage({super.key});
 
@@ -47,6 +49,11 @@ class _NotesPageState extends State<NotesPage> {
   //delete a note
   @override
   Widget build(BuildContext context) {
+    // note database
+    final noteDatabase = context.watch<NoteDataBase>();
+
+    //current notes
+    List<Note> currentNotes = noteDatabase.currentNotes;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Notes'),
@@ -54,6 +61,17 @@ class _NotesPageState extends State<NotesPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: createNote,
         child: const Icon(Icons.add),
+      ),
+      body: ListView.builder(
+        itemCount: currentNotes.length,
+        itemBuilder: (context, index) {
+          //get individual note
+          final note = currentNotes[index];
+          // list tile UI
+          return ListTile(
+            title: Text(note.text),
+          );
+        },
       ),
     );
   }
