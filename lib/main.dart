@@ -11,7 +11,7 @@ void main() async {
 
   runApp(ChangeNotifierProvider(
     create: (context) => NoteDataBase(),
-    child: const MyApp(),
+    child: MyApp(),
   ));
 }
 

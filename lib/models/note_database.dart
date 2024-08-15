@@ -36,6 +36,7 @@ class NoteDataBase extends ChangeNotifier {
 
     currentNotes.clear();
     currentNotes.addAll(fetchedNotes);
+    notifyListeners();
   }
 
   //U P D A T E - a note in db
