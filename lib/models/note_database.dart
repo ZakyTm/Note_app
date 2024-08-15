@@ -30,13 +30,23 @@ class NoteDataBase {
   }
 
   // R E A D  N O T E  - a notes from db
-  Future<void> readNotes() async {
-    List<Note> fetchNotes = await isar.notes.where().findAll();
+  Future<void> fetchNotes() async {
+    List<Note> fetchedNotes = await isar.notes.where().findAll();
 
     currentNotes.clear();
-    currentNotes.addAll(fetchNotes);
+    currentNotes.addAll(fetchedNotes);
   }
+
   //U P D A T E - a note in db
+  Future<void> updateNote(int id, String newText) async {
+    final existingNote = await isar.notes.get(id);
+
+    if (existingNote != null) {
+      existingNote.text = newText;
+      await isar.writeTxn(() => isar.notes.put(existingNote));
+      await fetchNotes();
+    }
+  }
 
   // D E L E T E - a note from the db
 }
