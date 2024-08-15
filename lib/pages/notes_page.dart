@@ -112,24 +112,27 @@ class _NotesPageState extends State<NotesPage> {
           //get individual note
           final note = currentNotes[index];
           // list tile UI
-          return ListTile(
-            title: Text(note.text),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.edit),
-                  onPressed: () {
-                    updateNote(note);
-                  },
-                ),
-                IconButton(
-                  icon: const Icon(Icons.delete),
-                  onPressed: () {
-                    deleteNote(note.id);
-                  },
-                ),
-              ],
+          return Card(
+            color: Colors.grey.shade400,
+            child: ListTile(
+              title: Text(note.text),
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.edit),
+                    onPressed: () {
+                      updateNote(note);
+                    },
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.delete),
+                    onPressed: () {
+                      deleteNote(note.id);
+                    },
+                  ),
+                ],
+              ),
             ),
           );
         },
