@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:note_app/components/drawer.dart';
+import 'package:note_app/components/note_tile.dart';
 import 'package:note_app/models/note_database.dart';
 import 'package:provider/provider.dart';
 
@@ -112,7 +113,7 @@ class _NotesPageState extends State<NotesPage> {
           ),
         ],
       ),
-      backgroundColor: Theme.of(context).colorScheme.primary,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       floatingActionButton: FloatingActionButton(
         onPressed: createNote,
         child: const Icon(Icons.add),
@@ -141,29 +142,8 @@ class _NotesPageState extends State<NotesPage> {
                 //get individual note
                 final note = currentNotes[index];
                 // list tile UI
-                return Card(
-                  color: Colors.grey.shade400,
-                  child: ListTile(
-                    title: Text(note.text),
-                    trailing: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        IconButton(
-                          icon: const Icon(Icons.edit),
-                          onPressed: () {
-                            updateNote(note);
-                          },
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.delete),
-                          onPressed: () {
-                            deleteNote(note.id);
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                );
+                
+                return NoteTile(text: note.text);
               },
             ),
           ),
