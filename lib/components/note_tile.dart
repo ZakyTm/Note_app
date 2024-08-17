@@ -27,15 +27,21 @@ class NoteTile extends StatelessWidget {
           text,
           style: GoogleFonts.dmSerifText(),
         ),
-        trailing: IconButton(
-          icon: const Icon(Icons.more_vert_rounded),
-          onPressed: () => showPopover(
-            width: 100,
-            height: 100,
-            context: context,
-            bodyBuilder: (context) => NoteSettings(),
-          ),
-        ),
+        trailing: Builder(builder: (context) {
+          return IconButton(
+            icon: const Icon(Icons.more_vert_rounded),
+            onPressed: () => showPopover(
+              width: 100,
+              height: 100,
+              backgroundColor: Theme.of(context).colorScheme.surface,
+              context: context,
+              bodyBuilder: (context) => NoteSettings(
+                onEditTap: onEditPressed,
+                onDeleteTap: onDeletePressed,
+              ),
+            ),
+          );
+        }),
       ),
     );
   }
