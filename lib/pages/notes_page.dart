@@ -116,7 +116,9 @@ class _NotesPageState extends State<NotesPage> {
       backgroundColor: Theme.of(context).colorScheme.surface,
       floatingActionButton: FloatingActionButton(
         onPressed: createNote,
-        child: const Icon(Icons.add),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+        child: Icon(Icons.add,
+            color: Theme.of(context).colorScheme.inversePrimary),
       ),
       drawer: MyDrawer(),
       body: Column(
@@ -142,8 +144,12 @@ class _NotesPageState extends State<NotesPage> {
                 //get individual note
                 final note = currentNotes[index];
                 // list tile UI
-                
-                return NoteTile(text: note.text);
+
+                return NoteTile(
+                  text: note.text,
+                  onEditPressed: () => updateNote(note),
+                  onDeletePressed: () => deleteNote(note.id),
+                );
               },
             ),
           ),
@@ -152,3 +158,42 @@ class _NotesPageState extends State<NotesPage> {
     );
   }
 }
+/* 
+Card(
+                  color: Theme.of(context).colorScheme.surface,
+                  child: ListTile(
+                    title: Text(
+                      note.text,
+                      style: GoogleFonts.dmSerifText(),
+                    ),
+                    trailing: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.edit),
+                          onPressed: () {
+                            updateNote(note);
+                          },
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.delete),
+                          onPressed: () {
+                            deleteNote(note.id);
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+
+
+
+
+
+
+
+
+
+
+
+*/
